@@ -12,12 +12,9 @@ public class ParkingLot {
     }
 
     public ParkingLot() {
-
+        this.capacity = 10;
     }
 
-    public int getParkingLotCapacity() {
-        return parkingTicketCarMap.size();
-    }
     public ParkingTicket park(Car car) {
         if (parkingTicketCarMap.size() >= capacity) {
             return null;
