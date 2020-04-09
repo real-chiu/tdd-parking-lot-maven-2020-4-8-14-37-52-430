@@ -29,6 +29,8 @@ public class ParkingLotTest {
 
         ParkingTicket invalidTicket = new ParkingTicket();
         Car carFetchedByInvalidTicket = parkingLot.fetchCar(invalidTicket);
+
+        Assert.assertNotNull(validParkingTicket);
         Assert.assertNull(carFetchedByInvalidTicket);
     }
 
@@ -41,6 +43,7 @@ public class ParkingLotTest {
 
         Car anotherCarFetchedByValidParkingTicket = parkingLot.fetchCar(validParkingTicket);
 
+        Assert.assertNotNull(carFetchedByValidParkingTicket);
         Assert.assertNull(anotherCarFetchedByValidParkingTicket);
     }
 
