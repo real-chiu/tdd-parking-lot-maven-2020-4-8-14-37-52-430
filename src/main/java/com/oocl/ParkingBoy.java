@@ -1,11 +1,13 @@
 package com.oocl;
 
 public class ParkingBoy {
-    
-    public ParkingBoy(int i) {
+    private ParkingLot parkingLot;
+
+    public ParkingBoy(ParkingLot parkingLot) {
+        this.parkingLot = parkingLot;
     }
 
-    public static ParkingTicket park(Car car) {
-        return null;
+    public ParkingTicket park(Car car) {
+        return this.parkingLot.park(car);
     }
 }
