@@ -6,41 +6,14 @@ import org.junit.Test;
 public class ParkingBoyTest {
 
     @Test
-    public void should_return_parking_ticket_when_parking_boy_park_car() {
-        ParkingBoy parkingBoy = new ParkingBoy();
-        ParkingTicket parkingTicket = parkingBoy.park(new Car());
+    public void should_able_to_park_car_when_parking_lot_capacity_is_smaller_than_max_Capacity() {
+        ParkingBoy parkingBoy = new ParkingBoy(2);
+        Car car = new Car();
+        Car carTwo = new Car();
+        ParkingTicket parkingTicket = ParkingBoy.park(car);
+        ParkingTicket parkingTicketTwo = ParkingBoy.park(carTwo);
+
         Assert.assertNotNull(parkingTicket);
-    }
-
-    @Test
-    public void should_return_corresponding_car_when_parking_boy_is_given_parking_ticket() {
-        ParkingBoy parkingBoy = new ParkingBoy();
-        Car car = new Car();
-        ParkingTicket parkingTicket = parkingBoy.park(car);
-        Car parkedCar = parkingBoy.fetchCar(parkingTicket);
-        Assert.assertEquals(parkedCar, car);
-    }
-
-    @Test
-    public void should_not_return_car_when_parking_boy_is_given_invalid_parking_ticket() {
-        ParkingBoy parkingBoy = new ParkingBoy();
-        Car car = new Car();
-        ParkingTicket validParkingTicket = parkingBoy.park(car);
-
-        ParkingTicket invalidTicket = new ParkingTicket();
-        Car carFetchedByInvalidTicket = parkingBoy.fetchCar(invalidTicket);
-        Assert.assertNull(carFetchedByInvalidTicket);
-    }
-
-    @Test
-    public void should_not_return_car_when_parking_boy_is_given_used_parking_ticket() {
-        ParkingBoy parkingBoy = new ParkingBoy();
-        Car car = new Car();
-        ParkingTicket validParkingTicket = parkingBoy.park(car);
-        Car carFetchedByValidParkingTicket = parkingBoy.fetchCar(validParkingTicket);
-
-        Car anotherCarFetchedByValidParkingTicket = parkingBoy.fetchCar(validParkingTicket);
-
-        Assert.assertNull(anotherCarFetchedByValidParkingTicket);
+        Assert.assertNotNull(parkingTicketTwo);
     }
 }
