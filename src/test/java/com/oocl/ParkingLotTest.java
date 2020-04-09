@@ -20,4 +20,15 @@ public class ParkingLotTest {
         Car parkedCar = parkingBoy.fetchCar(parkingTicket);
         Assert.assertEquals(parkedCar, car);
     }
+
+    @Test
+    public void should_not_return_car_when_parking_boy_is_given_invalid_parking_ticket() {
+        ParkingBoy parkingBoy = new ParkingBoy();
+        Car car = new Car();
+        ParkingTicket validParkingTicket = parkingBoy.park(car);
+
+        ParkingTicket invalidTicket = new ParkingTicket();
+        Car carFetchedByInvalidTicket = parkingBoy.fetchCar(invalidTicket);
+        Assert.assertNull(carFetchedByInvalidTicket);
+    }
 }
