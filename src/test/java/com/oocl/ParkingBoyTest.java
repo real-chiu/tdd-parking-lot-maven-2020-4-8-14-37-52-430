@@ -27,6 +27,7 @@ public class ParkingBoyTest {
         ParkingTicket parkingTicket = parkingBoy.park(car);
         ParkingTicket parkingTicketTwo = parkingBoy.park(carTwo);
 
+        Assert.assertNotNull(parkingTicket);
         Assert.assertNull(parkingTicketTwo);
     }
 }
