@@ -121,5 +121,6 @@ public class ParkingBoyTest {
         ParkingTicket parkingTicketTwo = parkingBoy.park(carTwo);
         Car fetchedCar = parkingBoy.fetchCar(parkingTicketTwo);
         Assert.assertEquals(fetchedCar, carTwo);
+
     }
 }

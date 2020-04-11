@@ -7,6 +7,10 @@ public class ParkingLot {
     private Map<ParkingTicket, Car> parkingTicketCarMap = new HashMap<>();
     private int capacity;
 
+    public int getCapacity() {
+        return capacity;
+    }
+
     public ParkingLot(int capacity) {
         this.capacity = capacity;
     }
