@@ -15,7 +15,15 @@ public class Manager extends ParkingBoy {
         Arrays.asList(parkingBoys).forEach(parkingBoy -> parkingBoyList.add(parkingBoy));
     }
 
-    public List<ParkingBoy> getParkingBoyList() {
-        return parkingBoyList;
+    public ParkingBoy getParkingBoyByIndex(int index) {
+        return parkingBoyList.get(index);
+    }
+
+    public ParkingTicket specifyParkingBoyToPark(int index, Car carOne) {
+        return getParkingBoyByIndex(index).park(carOne);
+    }
+
+    public Car specifyParkingBoyToFetchCar(int index, ParkingTicket parkingTicketOne) {
+        return getParkingBoyByIndex(index).fetchCar(parkingTicketOne);
     }
 }
