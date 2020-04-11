@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ParkingLot {
-    private Map<ParkingTicket, Car> parkingTicketCarMap = new HashMap<ParkingTicket, Car>();
+    private Map<ParkingTicket, Car> parkingTicketCarMap = new HashMap<>();
     private int capacity;
 
     public ParkingLot(int capacity) {
@@ -24,7 +24,7 @@ public class ParkingLot {
         return parkingTicket;
     }
 
-    public Car fetchCar(ParkingTicket parkingTicket) {
+    public Car fetchCar(ParkingTicket parkingTicket) throws UnrecognizedParkingTicketException{
         if (!this.parkingTicketCarMap.containsKey(parkingTicket)) {
             throw new UnrecognizedParkingTicketException();
         }
