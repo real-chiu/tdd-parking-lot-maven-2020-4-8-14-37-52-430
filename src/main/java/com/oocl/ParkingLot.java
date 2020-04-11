@@ -12,6 +12,10 @@ public class ParkingLot {
         return emptyCapacity;
     }
 
+    public int getTotalCapacity() {
+        return capacity;
+    }
+
     public ParkingLot(int capacity) {
         this.capacity = capacity;
     }
