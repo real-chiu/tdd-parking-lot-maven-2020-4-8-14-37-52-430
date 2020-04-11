@@ -46,4 +46,14 @@ public class ParkingBoyTest {
         expectedException.expect(UnrecognizedParkingTicketException.class);
         expectedException.expectMessage("Unrecognized Parking Ticket");
     }
+
+    @Test(expected = NoParkingTicketException.class)
+    public void should_return_exception_message_when_fetch_without_ticket() {
+        ParkingLot parkingLot = new ParkingLot();
+        ParkingBoy parkingBoy = new ParkingBoy((parkingLot));
+
+        parkingBoy.fetchCar(null);
+        expectedException.expect(NoParkingTicketException.class);
+        expectedException.expectMessage("Please provide your parking ticket");
+    }
 }
