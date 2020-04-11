@@ -45,4 +45,21 @@ public class ManagerTest {
         Assert.assertEquals(fetchedCarOne, carOne);
         Assert.assertEquals(fetchedCarTwo, carTwo);
     }
+
+    @Test
+    public void manager_should_be_able_to_park_and_fetch_car() {
+        ParkingLot parkingLotOne = new ParkingLot(2);
+        ParkingLot parkingLotTwo = new ParkingLot(4);
+        Manager manager = new Manager(parkingLotOne, parkingLotTwo);
+
+        Car carOne =  new Car();
+        Car carTwo =  new Car();
+
+        ParkingTicket parkingTicketOne = manager.park(carOne);
+        ParkingTicket parkingTicketTwo = manager.park(carTwo);
+        Car fetchedCarOne = manager.fetchCar(parkingTicketOne);
+        Car fetchedCarTwo = manager.fetchCar(parkingTicketTwo);
+        Assert.assertEquals(fetchedCarOne, carOne);
+        Assert.assertEquals(fetchedCarTwo, carTwo);
+    }
 }
