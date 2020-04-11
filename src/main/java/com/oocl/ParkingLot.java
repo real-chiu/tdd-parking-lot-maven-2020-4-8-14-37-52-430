@@ -28,6 +28,10 @@ public class ParkingLot {
         return parkingTicket;
     }
 
+    public boolean containsCarWithCorrespondingParkingTicket(ParkingTicket parkingTicket) {
+        return parkingTicketCarMap.containsKey(parkingTicket);
+    }
+
     public Car fetchCar(ParkingTicket parkingTicket) throws UnrecognizedParkingTicketException, NoParkingTicketException {
         if (parkingTicket == null) {
             throw new NoParkingTicketException();
