@@ -7,8 +7,9 @@ public class ParkingLot {
     private Map<ParkingTicket, Car> parkingTicketCarMap = new HashMap<>();
     private int capacity;
 
-    public int getCapacity() {
-        return capacity;
+    public int getEmptyCapacity() {
+        int emptyCapacity = capacity - parkingTicketCarMap.size();
+        return emptyCapacity;
     }
 
     public ParkingLot(int capacity) {

@@ -14,7 +14,7 @@ public class SmartParkingBoy extends ParkingBoy {
 
     public ParkingLot findParkingLotWithMoreCapacity() {
         //stream.max will return first max, therefore handled duplicate max
-        ParkingLot parkingLotWithMoreCapacity = parkingLots.stream().max(Comparator.comparing(parkingLot -> parkingLot.getCapacity())).get();
+        ParkingLot parkingLotWithMoreCapacity = parkingLots.stream().max(Comparator.comparing(parkingLot -> parkingLot.getEmptyCapacity())).get();
         return parkingLotWithMoreCapacity;
     }
 }
