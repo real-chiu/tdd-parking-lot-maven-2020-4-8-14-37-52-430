@@ -22,7 +22,7 @@ public class ParkingBoyTest {
         Assert.assertNotNull(parkingTicketTwo);
     }
 
-    @Test
+    @Test(expected = ParkingLotIsFullException.class)
     public void should_not_be_able_to_park_car_when_parking_lot_capacity_is_max() {
         ParkingLot parkingLot = new ParkingLot(1);
         ParkingBoy parkingBoy = new ParkingBoy(parkingLot);
@@ -55,5 +55,17 @@ public class ParkingBoyTest {
         parkingBoy.fetchCar(null);
         expectedException.expect(NoParkingTicketException.class);
         expectedException.expectMessage("Please provide your parking ticket");
+    }
+
+    @Test(expected = ParkingLotIsFullException.class)
+    public void should_return_exception_message_when_park_into_full_parking_lot() {
+        ParkingLot parkingLot = new ParkingLot(1);
+        ParkingBoy parkingBoy = new ParkingBoy((parkingLot));
+        Car carOne = new Car();
+        Car carTwo = new Car();
+        parkingBoy.park(carOne);
+        parkingBoy.park(carTwo);
+        expectedException.expect(ParkingLotIsFullException.class);
+        expectedException.expectMessage("Not enough position");
     }
 }

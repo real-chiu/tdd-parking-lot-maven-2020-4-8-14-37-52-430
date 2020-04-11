@@ -21,7 +21,7 @@ public class ParkingLotTest {
         Assert.assertEquals(parkedCar, car);
     }
 
-    @Test
+    @Test(expected = UnrecognizedParkingTicketException.class)
     public void should_not_return_car_when_parking_boy_is_given_invalid_parking_ticket() {
         ParkingLot parkingLot = new ParkingLot();
         Car car = new Car();
@@ -34,7 +34,7 @@ public class ParkingLotTest {
         Assert.assertNull(carFetchedByInvalidTicket);
     }
 
-    @Test
+    @Test(expected = UnrecognizedParkingTicketException.class)
     public void should_not_return_car_when_parking_boy_is_given_used_parking_ticket() {
         ParkingLot parkingLot = new ParkingLot();
         Car car = new Car();

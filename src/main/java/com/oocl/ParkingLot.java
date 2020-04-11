@@ -15,9 +15,9 @@ public class ParkingLot {
         this.capacity = 10;
     }
 
-    public ParkingTicket park(Car car) {
+    public ParkingTicket park(Car car) throws ParkingLotIsFullException {
         if (parkingTicketCarMap.size() >= capacity) {
-            return null;
+            throw new ParkingLotIsFullException();
         }
         ParkingTicket parkingTicket = new ParkingTicket();
         parkingTicketCarMap.put(parkingTicket, car);
