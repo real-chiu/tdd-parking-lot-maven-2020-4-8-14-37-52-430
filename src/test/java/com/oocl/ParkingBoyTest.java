@@ -68,4 +68,44 @@ public class ParkingBoyTest {
         expectedException.expect(ParkingLotIsFullException.class);
         expectedException.expectMessage("Not enough position");
     }
+
+    @Test
+    public void should_park_into_first_parking_lot_given_that_the_two_parking_lot_is_not_full() {
+        ParkingLot firstParkingLot = new ParkingLot(1);
+        ParkingLot secondParkingLot = new ParkingLot(1);
+
+        ParkingBoy parkingBoy = new ParkingBoy(firstParkingLot, secondParkingLot);
+        Car carOne =  new Car();
+        ParkingTicket parkingTicket = parkingBoy.park(carOne);
+        Assert.assertNotNull(parkingTicket);
+    }
+
+    @Test
+    public void should_park_into_second_parking_lot_when_first_parking_lot_is_full() {
+        ParkingLot firstParkingLot = new ParkingLot(1);
+        ParkingLot secondParkingLot = new ParkingLot(1);
+
+        ParkingBoy parkingBoy = new ParkingBoy(firstParkingLot, secondParkingLot);
+        Car carOne =  new Car();
+        Car carTwo =  new Car();
+        ParkingTicket parkingTicketOne = parkingBoy.park(carOne);
+        ParkingTicket parkingTicketTwo = parkingBoy.park(carTwo);
+        Assert.assertNotNull(parkingTicketTwo);
+    }
+
+    @Test(expected = ParkingLotIsFullException.class)
+    public void should_return_exception_message_when_all_parking_lots_are_full() {
+        ParkingLot firstParkingLot = new ParkingLot(1);
+        ParkingLot secondParkingLot = new ParkingLot(1);
+
+        ParkingBoy parkingBoy = new ParkingBoy(firstParkingLot, secondParkingLot);
+        Car carOne =  new Car();
+        Car carTwo =  new Car();
+        Car carThree =  new Car();
+        ParkingTicket parkingTicketOne = parkingBoy.park(carOne);
+        ParkingTicket parkingTicketTwo = parkingBoy.park(carTwo);
+        ParkingTicket parkingTicketThree = parkingBoy.park(carThree);
+        expectedException.expect(ParkingLotIsFullException.class);
+        expectedException.expectMessage("Not enough position");
+    }
 }
