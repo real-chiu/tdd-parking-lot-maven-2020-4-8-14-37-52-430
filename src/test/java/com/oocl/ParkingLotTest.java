@@ -1,9 +1,13 @@
 package com.oocl;
 
 import org.junit.Assert;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 public class ParkingLotTest {
+    @Rule
+    public ExpectedException expectedException = ExpectedException.none();
 
     @Test
     public void should_return_parking_ticket_when_parking_boy_park_car() {
@@ -45,6 +49,16 @@ public class ParkingLotTest {
 
         Assert.assertNotNull(carFetchedByValidParkingTicket);
         Assert.assertNull(anotherCarFetchedByValidParkingTicket);
+    }
+
+    @Test(expected = CarHasBeenParkedException.class)
+    public void should_not_park_car_when_the_car_has_been_parked() {
+        ParkingLot parkingLot = new ParkingLot();
+        Car car = new Car();
+        ParkingTicket validParkingTicket = parkingLot.park(car);
+        parkingLot.park(car);
+        expectedException.expect(CarHasBeenParkedException.class);
+        expectedException.expectMessage("Car has been parked!");
     }
 
 }

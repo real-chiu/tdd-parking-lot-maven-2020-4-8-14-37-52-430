@@ -29,12 +29,19 @@ public class ParkingLot {
     }
 
     public ParkingTicket park(Car car) throws ParkingLotIsFullException {
+        if (isCarParkedInThisParkingLot(car)) {
+            throw new CarHasBeenParkedException();
+        }
         if (isFull()) {
             throw new ParkingLotIsFullException();
         }
         ParkingTicket parkingTicket = new ParkingTicket();
         parkingTicketCarMap.put(parkingTicket, car);
         return parkingTicket;
+    }
+
+    private boolean isCarParkedInThisParkingLot(Car carToBeParked) {
+        return parkingTicketCarMap.containsValue(carToBeParked);
     }
 
     public boolean containsCarWithCorrespondingParkingTicket(ParkingTicket parkingTicket) {

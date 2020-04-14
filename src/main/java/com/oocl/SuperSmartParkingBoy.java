@@ -6,7 +6,7 @@ public class SuperSmartParkingBoy extends ParkingBoy{
     public SuperSmartParkingBoy(ParkingLot... parkingLots) {
         super(parkingLots);
     }
-    
+
     @Override
     public ParkingLot findCorrespondingParkingLotToParkCar() {
         return parkingLots.stream()
