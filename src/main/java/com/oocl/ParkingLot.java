@@ -29,6 +29,9 @@ public class ParkingLot {
     }
 
     public ParkingTicket park(Car car) throws ParkingLotIsFullException {
+        if (car == null) {
+            throw new NoCarToParkException();
+        }
         if (isCarParkedInThisParkingLot(car)) {
             throw new CarHasBeenParkedException();
         }

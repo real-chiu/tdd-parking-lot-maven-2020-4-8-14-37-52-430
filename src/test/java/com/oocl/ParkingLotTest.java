@@ -55,10 +55,17 @@ public class ParkingLotTest {
     public void should_not_park_car_when_the_car_has_been_parked() {
         ParkingLot parkingLot = new ParkingLot();
         Car car = new Car();
-        ParkingTicket validParkingTicket = parkingLot.park(car);
+        parkingLot.park(car);
         parkingLot.park(car);
         expectedException.expect(CarHasBeenParkedException.class);
         expectedException.expectMessage("Car has been parked!");
     }
 
+    @Test(expected = NoCarToParkException.class)
+    public void should_not_park_car_when_car_is_not_provided() {
+        ParkingLot parkingLot = new ParkingLot();
+        parkingLot.park(null);
+        expectedException.expect(NoCarToParkException.class);
+        expectedException.expectMessage("Please provide your car!");
+    }
 }
