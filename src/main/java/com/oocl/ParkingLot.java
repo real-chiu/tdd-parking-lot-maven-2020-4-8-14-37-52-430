@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class ParkingLot {
+    private static final int DEFAULT_CAPACITY = 10;
     private Map<ParkingTicket, Car> parkingTicketCarMap = new HashMap<>();
     private int capacity;
 
@@ -21,7 +22,7 @@ public class ParkingLot {
     }
 
     public ParkingLot() {
-        this.capacity = 10;
+        this.capacity = DEFAULT_CAPACITY;
     }
 
     public boolean isFull() {
@@ -29,7 +30,7 @@ public class ParkingLot {
     }
 
     public ParkingTicket park(Car car) throws ParkingLotIsFullException {
-        if (parkingTicketCarMap.size() >= capacity) {
+        if (isFull()) {
             throw new ParkingLotIsFullException();
         }
         ParkingTicket parkingTicket = new ParkingTicket();

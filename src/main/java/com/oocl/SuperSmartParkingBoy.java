@@ -8,13 +8,7 @@ public class SuperSmartParkingBoy extends ParkingBoy{
     }
 
     @Override
-    public ParkingTicket park(Car car) {
-        ParkingLot parkingLottWitHigherCapacityRatio = findParkingLotWitHigherCapacityRatio();
-        return parkingLottWitHigherCapacityRatio.park(car);
-    }
-
-    public ParkingLot findParkingLotWitHigherCapacityRatio() {
-        //stream.max will return first max, therefore handled duplicate max
+    public ParkingLot findCorrespondingParkingLotToParkCar() {
         ParkingLot parkingLotWithMoreCapacity = parkingLots.stream().max(Comparator.comparing(parkingLot -> {
             double ratio = (double) parkingLot.getEmptyCapacity() / (double) parkingLot.getTotalCapacity();
             return ratio;

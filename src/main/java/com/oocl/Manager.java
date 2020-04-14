@@ -20,23 +20,24 @@ public class Manager extends ParkingBoy {
     }
 
     public ParkingTicket specifyParkingBoyToPark(Car carOne) {
-        ParkingTicket parkingTicket = parkingBoyList.stream()
-                .map(parkingBoy -> parkingBoy.park(carOne))
-                .filter(car -> car != null)
+        ParkingBoy chosenParkingBoy = parkingBoyList.stream()
+                .filter(parkingBoy -> !parkingBoy.isAllParkingLotFull())
                 .findFirst()
                 .orElseThrow(ParkingLotIsFullException::new);
-        return parkingTicket;
+
+        return chosenParkingBoy.park(carOne);
     }
+
 
     public Car specifyParkingBoyToFetchCar(ParkingTicket parkingTicketOne) {
         if (parkingTicketOne == null) {
             throw new NoParkingTicketException();
         }
-        Car car = parkingBoyList.stream()
-                .map(parkingBoy -> parkingBoy.fetchCar(parkingTicketOne))
-                .filter(parkingTicket -> parkingTicket != null)
+        ParkingBoy chosenParkingBoy = parkingBoyList.stream()
+                .filter(parkingBoy -> parkingBoy.isAnyParkingLotContainsCarOfTheTicker(parkingTicketOne))
                 .findFirst()
                 .orElseThrow(UnrecognizedParkingTicketException::new);
-        return car;
+
+        return chosenParkingBoy.fetchCar(parkingTicketOne);
     }
 }

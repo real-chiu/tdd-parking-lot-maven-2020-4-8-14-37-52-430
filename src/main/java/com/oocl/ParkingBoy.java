@@ -1,9 +1,7 @@
 package com.oocl;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 public class ParkingBoy {
     protected List<ParkingLot> parkingLots;
@@ -12,32 +10,40 @@ public class ParkingBoy {
         this.parkingLots = Arrays.asList(parkingLots);
     }
 
+    public boolean isAllParkingLotFull() {
+        return parkingLots.stream().allMatch(parkingLot -> parkingLot.isFull());
+    }
+
+    public boolean isAnyParkingLotContainsCarOfTheTicker(ParkingTicket ticket) {
+        return parkingLots.stream().anyMatch(parkingLot -> parkingLot.containsCarWithCorrespondingParkingTicket(ticket));
+    }
+
     public ParkingTicket park(Car car) {
-        ParkingLot firstEmptyParkingLot = findFirstEmptyParkingLot();
+        ParkingLot firstEmptyParkingLot = findCorrespondingParkingLotToParkCar();
         return firstEmptyParkingLot.park(car);
     }
 
     public Car fetchCar(ParkingTicket parkingTicket) {
-        ParkingLot correspondingParkingLot = findCorrespondingParkingLot(parkingTicket);
+        ParkingLot correspondingParkingLot = findCorrespondingParkingLotToFetchCar(parkingTicket);
         return correspondingParkingLot.fetchCar(parkingTicket);
     }
 
-    public ParkingLot findCorrespondingParkingLot(ParkingTicket parkingTicket) {
-        try {
-            ParkingLot correspondingParkingLot = parkingLots.stream().filter(parkingLot -> parkingLot.containsCarWithCorrespondingParkingTicket(parkingTicket)).findFirst().get();
-            return correspondingParkingLot;
-        } catch (NoSuchElementException noSuchElementException) {
-            return new ParkingLot();
+    public ParkingLot findCorrespondingParkingLotToFetchCar(ParkingTicket parkingTicket) {
+        if (parkingTicket == null) {
+            throw new NoParkingTicketException();
         }
+        ParkingLot correspondingParkingLot = parkingLots.stream()
+                .filter(parkingLot -> parkingLot.containsCarWithCorrespondingParkingTicket(parkingTicket))
+                .findFirst()
+                .orElseThrow(UnrecognizedParkingTicketException::new);
+        return correspondingParkingLot;
     }
 
-    private ParkingLot findFirstEmptyParkingLot() throws NoSuchElementException {
-        try {
-            ParkingLot firstEmptyParkingLot = parkingLots.stream().filter(parkingLot -> !parkingLot.isFull()).findFirst().get();
-            return firstEmptyParkingLot;
-        } catch (NoSuchElementException noSuchElementException) {
-            ParkingLot lastParkingLot = parkingLots.get(parkingLots.size() - 1);
-            return lastParkingLot;
-        }
+    protected ParkingLot findCorrespondingParkingLotToParkCar() {
+        ParkingLot firstEmptyParkingLot = parkingLots.stream()
+                .filter(parkingLot -> !parkingLot.isFull())
+                .findFirst()
+                .orElseThrow(ParkingLotIsFullException::new);
+        return firstEmptyParkingLot;
     }
 }
