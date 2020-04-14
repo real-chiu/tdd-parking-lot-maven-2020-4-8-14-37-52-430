@@ -8,21 +8,20 @@ public class ParkingLot {
     private Map<ParkingTicket, Car> parkingTicketCarMap = new HashMap<>();
     private int capacity;
 
-    public int getEmptyCapacity() {
-        int emptyCapacity = capacity - parkingTicketCarMap.size();
-        return emptyCapacity;
-    }
-
-    public int getTotalCapacity() {
-        return capacity;
-    }
-
     public ParkingLot(int capacity) {
         this.capacity = capacity;
     }
 
     public ParkingLot() {
         this.capacity = DEFAULT_CAPACITY;
+    }
+
+    public int getEmptyCapacity() {
+        return capacity - parkingTicketCarMap.size();
+    }
+
+    public int getTotalCapacity() {
+        return capacity;
     }
 
     public boolean isFull() {
@@ -46,7 +45,7 @@ public class ParkingLot {
         if (parkingTicket == null) {
             throw new NoParkingTicketException();
         }
-        if (!this.parkingTicketCarMap.containsKey(parkingTicket)) {
+        if (!parkingTicketCarMap.containsKey(parkingTicket)) {
             throw new UnrecognizedParkingTicketException();
         }
         Car car = parkingTicketCarMap.get(parkingTicket);

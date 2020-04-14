@@ -9,7 +9,8 @@ public class SmartParkingBoy extends ParkingBoy {
 
     @Override
     public ParkingLot findCorrespondingParkingLotToParkCar() {
-        ParkingLot parkingLotWithMoreCapacity = parkingLots.stream().max(Comparator.comparing(parkingLot -> parkingLot.getEmptyCapacity())).get();
-        return parkingLotWithMoreCapacity;
+        return parkingLots.stream()
+                .max(Comparator.comparing(ParkingLot::getEmptyCapacity))
+                .orElse(null);
     }
 }

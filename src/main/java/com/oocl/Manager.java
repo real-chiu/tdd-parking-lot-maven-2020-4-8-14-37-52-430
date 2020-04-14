@@ -12,7 +12,7 @@ public class Manager extends ParkingBoy {
     }
 
     public void addParkingBoyToList(ParkingBoy... parkingBoys) {
-        Arrays.asList(parkingBoys).forEach(parkingBoy -> parkingBoyList.add(parkingBoy));
+        parkingBoyList.addAll(Arrays.asList(parkingBoys));
     }
 
     public ParkingBoy getParkingBoyByIndex(int index) {
@@ -28,13 +28,12 @@ public class Manager extends ParkingBoy {
         return chosenParkingBoy.park(carOne);
     }
 
-
     public Car specifyParkingBoyToFetchCar(ParkingTicket parkingTicketOne) {
         if (parkingTicketOne == null) {
             throw new NoParkingTicketException();
         }
         ParkingBoy chosenParkingBoy = parkingBoyList.stream()
-                .filter(parkingBoy -> parkingBoy.isAnyParkingLotContainsCarOfTheTicker(parkingTicketOne))
+                .filter(parkingBoy -> parkingBoy.isAnyParkingLotContainsCarOfTheTicket(parkingTicketOne))
                 .findFirst()
                 .orElseThrow(UnrecognizedParkingTicketException::new);
 

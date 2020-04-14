@@ -11,10 +11,10 @@ public class ParkingBoy {
     }
 
     public boolean isAllParkingLotFull() {
-        return parkingLots.stream().allMatch(parkingLot -> parkingLot.isFull());
+        return parkingLots.stream().allMatch(ParkingLot::isFull);
     }
 
-    public boolean isAnyParkingLotContainsCarOfTheTicker(ParkingTicket ticket) {
+    public boolean isAnyParkingLotContainsCarOfTheTicket(ParkingTicket ticket) {
         return parkingLots.stream().anyMatch(parkingLot -> parkingLot.containsCarWithCorrespondingParkingTicket(ticket));
     }
 
@@ -32,18 +32,16 @@ public class ParkingBoy {
         if (parkingTicket == null) {
             throw new NoParkingTicketException();
         }
-        ParkingLot correspondingParkingLot = parkingLots.stream()
+        return parkingLots.stream()
                 .filter(parkingLot -> parkingLot.containsCarWithCorrespondingParkingTicket(parkingTicket))
                 .findFirst()
                 .orElseThrow(UnrecognizedParkingTicketException::new);
-        return correspondingParkingLot;
     }
 
     protected ParkingLot findCorrespondingParkingLotToParkCar() {
-        ParkingLot firstEmptyParkingLot = parkingLots.stream()
+        return parkingLots.stream()
                 .filter(parkingLot -> !parkingLot.isFull())
                 .findFirst()
                 .orElseThrow(ParkingLotIsFullException::new);
-        return firstEmptyParkingLot;
     }
 }
